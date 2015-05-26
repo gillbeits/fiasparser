@@ -1,5 +1,5 @@
 {
-  "name": "gillbeits/FiasParser",
+  "name": "gillbeits/fias-parser",
   "description": "Парсер классификатора адресов России ФИАС",
   "minimum-stability": "dev",
   "license": "proprietary",
