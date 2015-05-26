@@ -8,7 +8,7 @@
 
 namespace FiasParser\Events;
 
-use Composer\EventDispatcher\Event as BaseClass;
+use Symfony\Component\EventDispatcher\Event as BaseClass;
 use FiasParser\Parser;
 
 /**
