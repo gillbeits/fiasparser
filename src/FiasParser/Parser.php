@@ -16,15 +16,35 @@ use FiasParser\Models\Object;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class Parser extends EventDispatcher {
+    /**
+     * @var \XMLReader
+     */
     protected $xmlReader;
+    /**
+     * @var Factory
+     */
     protected $factory;
-
+    /**
+     * @var int
+     */
     private $bulk_count = 0;
 
+    /**
+     * @var array
+     */
     private $path = [];
+    /**
+     * @var array
+     */
     private $bulk_rows = [];
+    /**
+     * @var array
+     */
     private $bulk_rows_counter = [];
-
+    /**
+     * @var \Symfony\Component\Console\Helper\ProgressBar
+     */
+    protected $progressBar;
 
     /**
      * @param Factory $factory
@@ -37,6 +57,22 @@ class Parser extends EventDispatcher {
 
         $this->xmlReader = new \XMLReader();
         $this->factory = $factory;
+    }
+
+    /**
+     * @return \Symfony\Component\Console\Helper\ProgressBar
+     */
+    public function getProgressBar()
+    {
+        return $this->progressBar;
+    }
+
+    /**
+     * @param \Symfony\Component\Console\Helper\ProgressBar $progressBar
+     */
+    public function setProgressBar(\Symfony\Component\Console\Helper\ProgressBar $progressBar)
+    {
+        $this->progressBar = $progressBar;
     }
 
     /**
