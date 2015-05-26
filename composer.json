@@ -1,7 +1,7 @@
 {
   "name": "gillbeits/fias-parser",
   "description": "Парсер классификатора адресов России ФИАС",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
     {
