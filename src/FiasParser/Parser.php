@@ -30,6 +30,11 @@ class Parser extends EventDispatcher {
     private $bulk_count = 0;
 
     /**
+     * @var int
+     */
+    private $bytes = 0;
+
+    /**
      * @var array
      */
     private $path = [];
@@ -60,6 +65,14 @@ class Parser extends EventDispatcher {
     }
 
     /**
+     * @return int
+     */
+    public function getBytes()
+    {
+        return $this->bytes;
+    }
+
+    /**
      * @return \Symfony\Component\Console\Helper\ProgressBar
      */
     public function getProgressBar()
@@ -79,9 +92,9 @@ class Parser extends EventDispatcher {
      * @param $event
      * @return mixed
      */
-    public function getBulkRowsCounter($event)
+    public function getBulkRowsCounter($event = null)
     {
-        return $this->bulk_rows_counter[$event];
+        return $event ? $this->bulk_rows_counter[$event] : $this->bulk_rows_counter;
     }
 
     /**
@@ -90,6 +103,7 @@ class Parser extends EventDispatcher {
     public function parse($file)
     {
         $this->path = [];
+        $this->bytes = 0;
 
         $this->xmlReader->open($file);
         $this->read();
@@ -118,11 +132,13 @@ class Parser extends EventDispatcher {
 
                 switch ($path) {
                     case 'AddressObjects/Object':
+                        $this->bytes += mb_strlen($this->loadElementXml()->asXML()) - 39;
                         $addrObj = $this->factory->createAddrObject();
                         $this->dispatch('AddressObject', new AddrObjEvent($this->parseObj($addrObj), $this));
                         break;
 
                     case 'Houses/House':
+                        $this->bytes += mb_strlen($this->loadElementXml()->asXML()) - 39;
                         $house = $this->factory->createHouse();
                         $this->dispatch('House', new HouseEvent($this->parseObj($house), $this));
                         break;
