@@ -9,11 +9,11 @@
 namespace FiasParser;
 
 
-use Composer\EventDispatcher\EventDispatcher;
 use FiasParser\Events\AddrObjEvent;
 use FiasParser\Events\BulkEvent;
 use FiasParser\Events\HouseEvent;
 use FiasParser\Models\Object;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class Parser extends EventDispatcher {
     protected $xmlReader;
