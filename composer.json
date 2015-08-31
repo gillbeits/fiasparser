@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": ">=5.5.0",
-    "symfony/event-dispatcher": "dev-master"
+    "symfony/event-dispatcher": "~2.1"
   },
   "autoload": {
     "psr-0": {
